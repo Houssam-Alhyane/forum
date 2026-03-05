@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -33,7 +34,6 @@ import (
 // 	http.ServeFile(w, r, filePath)
 // }
 
-
 // =======================================================================
 
 type TemplateData struct {
@@ -57,9 +57,23 @@ func Forum(w http.ResponseWriter, r *http.Request) {
 		HandleError(w, http.StatusInternalServerError, "Template error")
 		return
 	}
-
+	fullURL := r.URL.String() // includes path + query
+	fmt.Println("Full URL:", fullURL)
+	// check if a category are se is
+	r.ParseForm() // must call first
 	// get posts
-	posts, err := api.GetPosts()
+	categories := r.Form["categories"]
+	isLiked := r.FormValue("my-liked-post")
+	isByMe := r.FormValue("my-creat-postes")
+	fmt.Println("cats", categories)
+	var posts []api.Post
+	if len(categories) == 0 && isLiked != "true" && isByMe != "true" {
+		posts, _ = api.GetPosts()
+	} else {
+		// this for filtring (the 0 no userId,false for postedbyMe,2 for liked byMe)
+		posts, _ = api.GetFiltrtPOst(0, categories, false, false)
+		fmt.Println("start filtring ")
+	}
 
 	var buf bytes.Buffer
 	cookie, err := r.Cookie("session_id")

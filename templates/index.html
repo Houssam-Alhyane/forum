@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- todo add a humberger menu in nav Bar for mobile devices  -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,8 +7,10 @@
     <title>01 Forum</title>
     <link rel="stylesheet" href="/static/style.css" />
   </head>
+
   <body>
     <!-- HEADER -->
+
     <header class="navbar">
       <div class="logo">01Forum</div>
       <div class="auth-buttons">
@@ -44,34 +47,49 @@
 
     <div class="container">
       <!-- FILTER SECTION -->
-      <aside class="sidebar">
-        <h3>Filter Posts</h3>
+     <aside class="sidebar">
+  <h3>Filter Posts</h3>
 
-        <div class="filter-group">
-          <h4>By Category</h4>
-          <label><input type="checkbox" checked /> General</label>
-          <label><input type="checkbox" /> Lifestyle</label>
-          <label><input type="checkbox" /> Health & Fitness</label>
-          <label><input type="checkbox" /> Travel</label>
-          <label><input type="checkbox" /> Food & Cooking</label>
-          <label><input type="checkbox" /> Education</label>
-          <label><input type="checkbox" /> Business</label>
-          <label><input type="checkbox" /> Finance</label>
-          <label><input type="checkbox" /> Entertainment</label>
-          <label><input type="checkbox" /> Sports</label>
-          <label><input type="checkbox" /> Personal Dev</label>
-          <label><input type="checkbox" /> Culture</label>
-          <label><input type="checkbox" /> News</label>
-        </div>
+  <form method="GET" action="/" id="filter-form">
 
-        <!-- Visible only for logged-in users -->
-        <div class="filter-group registered-only">
-          <h4>My Activity</h4>
-          <button class="filter-btn">My Created Posts</button>
-          <button class="filter-btn">Posts I Liked</button>
-        </div>
-      </aside>
 
+    <!-- My Posts / Liked Posts Buttons -->
+    <div class="filter-group registered-only">
+      <button type="button" name="my-creat-postes"  class="filter-btn">
+        My Created Posts
+      </button>
+
+      <button type="button" name="my-liked-post" class="filter-btn">
+        Posts I Liked
+      </button>
+    </div>
+    
+     <!-- Categories -->
+    <div class="filter-group">
+      <h4>By Category</h4>
+      <input type="hidden" name="my-creat-postes" id="input-my-creat-postes" />
+<input type="hidden" name="my-liked-post" id="input-my-liked-post" />
+
+      <label><input type="checkbox" name="categories" value="General"  /> General</label>
+      <label><input type="checkbox" name="categories" value="Lifestyle" /> Lifestyle</label>
+      <label><input type="checkbox" name="categories" value="Health & Fitness" /> Health & Fitness</label>
+      <label><input type="checkbox" name="categories" value="Travel" /> Travel</label>
+      <label><input type="checkbox" name="categories" value="Food & Cooking" /> Food & Cooking</label>
+      <label><input type="checkbox" name="categories" value="Education" /> Education</label>
+      <label><input type="checkbox" name="categories" value="Business" /> Business</label>
+      <label><input type="checkbox" name="categories" value="Finance" /> Finance</label>
+      <label><input type="checkbox" name="categories" value="Entertainment" /> Entertainment</label>
+      <label><input type="checkbox" name="categories" value="Sports" /> Sports</label>
+      <label><input type="checkbox" name="categories" value="Personal Dev" /> Personal Dev</label>
+      <label><input type="checkbox" name="categories" value="Culture" /> Culture</label>
+      <label><input type="checkbox" name="categories" value="News" /> News</label>
+
+      <button type="submit" class="filter-btn">Apply Filters</button>
+      <a href="/" class="clear-btn">Clear Filters</a>
+    </div>
+
+  </form>
+</aside>
       <!-- MAIN CONTENT -->
       <main class="content">
         <!-- CREATE POST (REGISTERED USERS ONLY) -->
@@ -87,19 +105,79 @@
             ></textarea>
 
             <div class="categories">
-              <label><input type="checkbox" checked /> General</label>
-              <label><input type="checkbox" /> Lifestyle</label>
-              <label><input type="checkbox" /> Health & Fitness</label>
-              <label><input type="checkbox" /> Travel</label>
-              <label><input type="checkbox" /> Food & Cooking</label>
-              <label><input type="checkbox" /> Education</label>
-              <label><input type="checkbox" /> Business</label>
-              <label><input type="checkbox" /> Finance</label>
-              <label><input type="checkbox" /> Entertainment</label>
-              <label><input type="checkbox" /> Sports</label>
-              <label><input type="checkbox" /> Personal Dev</label>
-              <label><input type="checkbox" /> Culture</label>
-              <label><input type="checkbox" /> News</label>
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="General"
+                  checked
+                />
+                General</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Lifestyle" />
+                Lifestyle</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Health & Fitness"
+                />
+                Health & Fitness</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Travel" />
+                Travel</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Food & Cooking"
+                />
+                Food & Cooking</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Education" />
+                Education</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Business" />
+                Business</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Finance" />
+                Finance</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Entertainment"
+                />
+                Entertainment</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Sports" />
+                Sports</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Personal Dev"
+                />
+                Personal Dev</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Culture" />
+                Culture</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="News" />
+                News</label
+              >
             </div>
 
             <button type="submit" class="btn primary">Publish</button>
@@ -121,8 +199,9 @@
             </div>
 
             <div class="post-categories">
-              <span class="category">Programming</span>
-              <span class="category">Technology</span>
+              {{range .Categories}}
+              <span class="category">{{.}}</span>
+              {{end}}
             </div>
 
             <div class="post-actions">
@@ -165,4 +244,62 @@
       </main>
     </div>
   </body>
+  <script>
+    document.querySelectorAll(".filter-btn").forEach(button => {
+  button.addEventListener("click", function () {
+    this.classList.toggle("active");
+
+    // Map button names to hidden inputs
+    const hiddenInputs = {
+      "my-creat-postes": document.getElementById("input-my-creat-postes"),
+      "my-liked-post": document.getElementById("input-my-liked-post"),
+    };
+
+    // Update hidden inputs based on active buttons
+    Object.keys(hiddenInputs).forEach(name => {
+      hiddenInputs[name].value = ""; // reset
+    });
+
+    const activeButtons = Array.from(document.querySelectorAll(".filter-btn.active"));
+    activeButtons.forEach(btn => {
+      if (hiddenInputs[btn.name]) {
+        hiddenInputs[btn.name].value = "true";
+      }
+    });
+  });
+});
+  </script>
+<!-- <script>
+  document.querySelectorAll(".filter-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      // Toggle active class
+      this.classList.toggle("active");
+
+      // Get all active buttons
+      const activeButtons = Array.from(document.querySelectorAll(".filter-btn.active"));
+
+      // Use URL and URLSearchParams to modify query safely
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      // Clear previous custom filter params first (if any)
+      ['my-creat-postes', 'my-liked-post'].forEach(name => params.delete(name));
+
+      // Add active filters to query
+      activeButtons.forEach(btn => {
+        if (btn.name) {
+          params.set(btn.name, 'true');
+        }
+      });
+
+
+
+      // Update the URL without reloading the page
+      window.history.replaceState({}, '', url);
+
+      console.log("Updated URL:", url.toString());
+    });
+  });
+</script> -->
+  
 </html>
