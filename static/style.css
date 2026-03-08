@@ -2,7 +2,7 @@
    01FORUM — Brutalist Editorial CSS
    ================================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
 
 /* ── Variables ────────────────────────────────────────────────── */
 :root {
@@ -18,9 +18,9 @@
   --text-muted: #7a7a7a;
   --text-dim: #444;
   --radius: 2px;
-  --mono: "Space Mono", monospace;
-  --serif: "DM Serif Display", serif;
-  --sans: "IBM Plex Sans", sans-serif;
+  --mono: 'Space Mono', monospace;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'IBM Plex Sans', sans-serif;
 }
 
 /* ── Reset ────────────────────────────────────────────────────── */
@@ -76,7 +76,7 @@ a:hover {
 }
 
 .logo::before {
-  content: "▶ ";
+  content: '▶ ';
   color: var(--accent);
   font-size: 0.75rem;
 }
@@ -151,6 +151,11 @@ a:hover {
   color: #0f0f0f;
   border-color: var(--accent);
 }
+.btn.danger {
+  background-color: var(--red);
+  color: #0f0f0f;
+  border-color: var(--red);
+}
 .btn.primary:hover {
   background: var(--accent-dim);
   border-color: var(--accent-dim);
@@ -223,7 +228,7 @@ button {
   color: var(--text);
 }
 
-.filter-group input[type="checkbox"] {
+.filter-group input[type='checkbox'] {
   accent-color: var(--accent);
   width: 13px;
   height: 13px;
@@ -257,9 +262,6 @@ button {
   background: rgba(232, 255, 71, 0.04);
 }
 
-
-
-
 /* ── Main Content ─────────────────────────────────────────────── */
 .content {
   padding: 2rem;
@@ -291,9 +293,9 @@ button {
 }
 
 /* ── Form Inputs (shared) ─────────────────────────────────────── */
-input[type="text"],
-input[type="email"],
-input[type="password"],
+input[type='text'],
+input[type='email'],
+input[type='password'],
 textarea {
   width: 100%;
   background: var(--surface-2);
@@ -308,9 +310,9 @@ textarea {
   resize: none;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
 textarea:focus {
   border-color: var(--accent);
 }
@@ -356,7 +358,10 @@ textarea {
   margin-bottom: 0.3rem;
   line-height: 1.3;
 }
-
+.delete-block {
+  display: flex;
+  justify-content: space-between;
+}
 .post-meta {
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -558,7 +563,7 @@ textarea {
 }
 
 .card .btn,
-.card button[type="submit"] {
+.card button[type='submit'] {
   width: 100%;
   justify-content: center;
   padding: 0.7rem;
@@ -569,7 +574,7 @@ textarea {
   margin-top: 0.5rem;
 }
 
-.card button[type="submit"]:hover {
+.card button[type='submit']:hover {
   background: var(--accent-dim);
   border-color: var(--accent-dim);
 }
@@ -694,7 +699,7 @@ textarea {
   background: rgba(232, 255, 71, 0.02);
 }
 
-.create-post .categories input[type="checkbox"] {
+.create-post .categories input[type='checkbox'] {
   accent-color: var(--accent);
   width: 12px;
   height: 12px;
@@ -703,7 +708,7 @@ textarea {
 }
 
 /* Custom checkbox indicator styling for browsers that support it */
-.create-post .categories input[type="checkbox"]:checked {
+.create-post .categories input[type='checkbox']:checked {
   background-color: var(--accent);
   border-color: var(--accent);
 }
@@ -733,7 +738,7 @@ textarea {
   gap: 1rem;
 }
 
-.create-post input[type="text"] {
+.create-post input[type='text'] {
   font-family: var(--mono);
   font-size: 0.85rem;
   letter-spacing: 0.02em;
@@ -747,7 +752,7 @@ textarea {
 
 /* ── Category Section Header ──────────────────────────────────── */
 .create-post .categories::before {
-  content: "SELECT CATEGORIES";
+  content: 'SELECT CATEGORIES';
   display: block;
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -758,7 +763,7 @@ textarea {
 }
 
 /* ── Publish Button Enhancement ───────────────────────────────── */
-.create-post button[type="submit"] {
+.create-post button[type='submit'] {
   align-self: flex-start;
   min-width: 140px;
   margin-top: 0.5rem;
@@ -780,7 +785,7 @@ textarea {
     max-height: 180px;
   }
 
-  .create-post button[type="submit"] {
+  .create-post button[type='submit'] {
     align-self: stretch;
     width: 100%;
   }
