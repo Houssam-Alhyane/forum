@@ -5,15 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>01 Forum</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css" />
     <script src="/static/script.js" defer></script>
     <!-- Modern best practice: 
      1. Script downloads in parallel
      2. Executes after HTML is fully parsed
      3. Does NOT block rendering -->
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- HEADER -->
 
     <header class="navbar">
@@ -52,49 +51,101 @@
 
     <div class="container">
       <!-- FILTER SECTION -->
-     <aside class="sidebar">
-  <h3>Filter Posts</h3>
+      <aside class="sidebar">
+        <h3>Filter Posts</h3>
 
-  <form method="GET" action="/" id="filter-form">
+        <form method="GET" action="/" id="filter-form">
+          <!-- My Posts / Liked Posts Buttons -->
+          <div class="filter-group registered-only">
+            <button type="button" name="my-creat-postes" class="filter-btn">
+              My Created Posts
+            </button>
 
+            <button type="button" name="my-liked-post" class="filter-btn">
+              Posts I Liked
+            </button>
+          </div>
 
-    <!-- My Posts / Liked Posts Buttons -->
-    <div class="filter-group registered-only">
-      <button type="button" name="my-creat-postes"  class="filter-btn">
-        My Created Posts
-      </button>
+          <!-- Categories -->
+          <div class="filter-group">
+            <h4>By Category</h4>
+            <input
+              type="hidden"
+              name="my-creat-postes"
+              id="input-my-creat-postes"
+            />
+            <input
+              type="hidden"
+              name="my-liked-post"
+              id="input-my-liked-post"
+            />
 
-      <button type="button" name="my-liked-post" class="filter-btn">
-        Posts I Liked
-      </button>
-    </div>
-    
-     <!-- Categories -->
-    <div class="filter-group">
-      <h4>By Category</h4>
-      <input type="hidden" name="my-creat-postes" id="input-my-creat-postes" />
-<input type="hidden" name="my-liked-post" id="input-my-liked-post" />
+            <label
+              ><input type="checkbox" name="categories" value="General" />
+              General</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Lifestyle" />
+              Lifestyle</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="categories"
+                value="Health & Fitness"
+              />
+              Health & Fitness</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Travel" />
+              Travel</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="categories"
+                value="Food & Cooking"
+              />
+              Food & Cooking</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Education" />
+              Education</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Business" />
+              Business</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Finance" />
+              Finance</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Entertainment" />
+              Entertainment</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Sports" />
+              Sports</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Personal Dev" />
+              Personal Dev</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="Culture" />
+              Culture</label
+            >
+            <label
+              ><input type="checkbox" name="categories" value="News" />
+              News</label
+            >
 
-      <label><input type="checkbox" name="categories" value="General"  /> General</label>
-      <label><input type="checkbox" name="categories" value="Lifestyle" /> Lifestyle</label>
-      <label><input type="checkbox" name="categories" value="Health & Fitness" /> Health & Fitness</label>
-      <label><input type="checkbox" name="categories" value="Travel" /> Travel</label>
-      <label><input type="checkbox" name="categories" value="Food & Cooking" /> Food & Cooking</label>
-      <label><input type="checkbox" name="categories" value="Education" /> Education</label>
-      <label><input type="checkbox" name="categories" value="Business" /> Business</label>
-      <label><input type="checkbox" name="categories" value="Finance" /> Finance</label>
-      <label><input type="checkbox" name="categories" value="Entertainment" /> Entertainment</label>
-      <label><input type="checkbox" name="categories" value="Sports" /> Sports</label>
-      <label><input type="checkbox" name="categories" value="Personal Dev" /> Personal Dev</label>
-      <label><input type="checkbox" name="categories" value="Culture" /> Culture</label>
-      <label><input type="checkbox" name="categories" value="News" /> News</label>
-
-      <button type="submit" class="filter-btn">Apply Filters</button>
-      <a href="/" class="clear-btn">Clear Filters</a>
-    </div>
-
-  </form>
-</aside>
+            <button type="submit" class="filter-btn">Apply Filters</button>
+            <a href="/" class="clear-btn">Clear Filters</a>
+          </div>
+        </form>
+      </aside>
       <!-- MAIN CONTENT -->
       <main class="content">
         <!-- CREATE POST (REGISTERED USERS ONLY) -->
@@ -189,16 +240,20 @@
           </form>
         </section>
 
-            <!-- POSTS LIST -->
-            <section class="posts">
-
-                {{range .Posts}}
-                <!-- SINGLE POST -->
-                <article class="post" data-post-id="{{.Id}}">
-                    <div class="post-header">
-                        <h3>{{.Title}}</h3>
-                        <span class="post-meta">Posted by {{.Username}} · 2 hours ago</span>
-                    </div>
+        <!-- POSTS LIST -->
+        <section class="posts">
+          {{range .Posts}}
+          <!-- SINGLE POST -->
+          <article class="post" data-post-id="{{.Id}}">
+            <div class="post-header">
+              <h3>{{.Title}}</h3>
+              {{if and $.IsLoggedIn (eq $.User.Id .UserId)}}
+              <button>Delete</button>
+              {{end}}
+              <span class="post-meta"
+                >Posted by {{.Username}} · 2 hours ago</span
+              >
+            </div>
 
             <div class="post-body">
               <p>{{.Text}}</p>
@@ -210,24 +265,39 @@
               {{end}}
             </div>
 
-                    <div class="post-actions">
-                        <button class="like-btn{{if eq .IsLiked 1}} active{{end}}">👍 {{.LikeCount}}</button>
-                        <button class="dislike-btn{{if eq .IsLiked 0}} active{{end}}">👎 {{.DislikeCount}}</button>
-                    </div>
+            <div class="post-actions">
+              <button class="like-btn{{if eq .IsLiked 1}} active{{end}}">
+                👍 {{.LikeCount}}
+              </button>
+              <button class="dislike-btn{{if eq .IsLiked 0}} active{{end}}">
+                👎 {{.DislikeCount}}
+              </button>
+            </div>
 
-                    <!-- COMMENTS -->
-                    <div class="comments">
-                        <h4>Comments</h4>
-                        
-                        {{range .Comments}}
-                        <div class="comment" data-comment-id="{{.Id}}">
-                            <p><strong>{{.Username}}:</strong> {{.Text}}</p>
-                            <div class="comment-actions">
-                                <button class="comment-like-btn small{{if eq .IsLiked 1}} active{{end}}">👍 {{.LikeCount}}</button>
-                                <button class="comment-dislike-btn small{{if eq .IsLiked 0}} active{{end}}">👎 {{.DislikeCount}}</button>
-                            </div>
-                        </div>
-                        {{end}}
+            <!-- COMMENTS -->
+            <div class="comments">
+              <h4>Comments</h4>
+
+              {{range .Comments}}
+              <div class="comment" data-comment-id="{{.Id}}">
+                <p><strong>{{.Username}}:</strong> {{.Text}}</p>
+                {{if and $.IsLoggedIn (eq $.User.Id .UserId)}}
+                <button>Delete</button>
+                {{end}}
+                <div class="comment-actions">
+                  <button
+                    class="comment-like-btn small{{if eq .IsLiked 1}} active{{end}}"
+                  >
+                    👍 {{.LikeCount}}
+                  </button>
+                  <button
+                    class="comment-dislike-btn small{{if eq .IsLiked 0}} active{{end}}"
+                  >
+                    👎 {{.DislikeCount}}
+                  </button>
+                </div>
+              </div>
+              {{end}}
 
               <!-- Add Comment (REGISTERED USERS ONLY) -->
               <div class="add-comment registered-only">
@@ -251,31 +321,33 @@
     </div>
   </body>
   <script>
-    document.querySelectorAll(".filter-btn").forEach(button => {
-  button.addEventListener("click", function () {
-    this.classList.toggle("active");
+    document.querySelectorAll('.filter-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        this.classList.toggle('active');
 
-    // Map button names to hidden inputs
-    const hiddenInputs = {
-      "my-creat-postes": document.getElementById("input-my-creat-postes"),
-      "my-liked-post": document.getElementById("input-my-liked-post"),
-    };
+        // Map button names to hidden inputs
+        const hiddenInputs = {
+          'my-creat-postes': document.getElementById('input-my-creat-postes'),
+          'my-liked-post': document.getElementById('input-my-liked-post'),
+        };
 
-    // Update hidden inputs based on active buttons
-    Object.keys(hiddenInputs).forEach(name => {
-      hiddenInputs[name].value = ""; // reset
+        // Update hidden inputs based on active buttons
+        Object.keys(hiddenInputs).forEach((name) => {
+          hiddenInputs[name].value = ''; // reset
+        });
+
+        const activeButtons = Array.from(
+          document.querySelectorAll('.filter-btn.active'),
+        );
+        activeButtons.forEach((btn) => {
+          if (hiddenInputs[btn.name]) {
+            hiddenInputs[btn.name].value = 'true';
+          }
+        });
+      });
     });
-
-    const activeButtons = Array.from(document.querySelectorAll(".filter-btn.active"));
-    activeButtons.forEach(btn => {
-      if (hiddenInputs[btn.name]) {
-        hiddenInputs[btn.name].value = "true";
-      }
-    });
-  });
-});
   </script>
-<!-- <script>
+  <!-- <script>
   document.querySelectorAll(".filter-btn").forEach(button => {
     button.addEventListener("click", function () {
       // Toggle active class
@@ -307,5 +379,4 @@
     });
   });
 </script> -->
-  
 </html>
