@@ -17,7 +17,7 @@ type Post struct {
 	Title                   string
 	Text                    string
 	LikeCount, DislikeCount int
-	IsLiked                 int // 1:liked, 0:disliked, -1:none
+	IsLiked                 int // 1:liked, 0:none, -1:disliked
 	Comments                []Comment
 	Categories              []string // Add this field to store category names
 }
@@ -78,7 +78,6 @@ func GetPosts() ([]Post, error) {
 // this function is for filtrt posts
 
 func GetFiltrtPOst(userID int, categories []string, likedByMe, postedByMe bool) ([]Post, error) {
-
 	db := database.Database
 
 	query := `
@@ -143,7 +142,6 @@ func GetFiltrtPOst(userID int, categories []string, likedByMe, postedByMe bool) 
 			"SELECT name FROM users WHERE id = ?",
 			p.UserId,
 		).Scan(&p.Username)
-
 		if err != nil {
 			return nil, err
 		}
@@ -260,25 +258,25 @@ func GetPostsOptimized() ([]Post, error) {
 func CheckLikedPosts(posts []Post, userId int) {
 	// check if posts are liked
 	for i, post := range posts {
-		err := database.Database.QueryRow(
+		_ = database.Database.QueryRow(
 			"SELECT is_like FROM post_reactions WHERE user_id = ? AND post_id = ?",
 			userId,
 			post.Id,
 		).Scan(&posts[i].IsLiked)
-		if err == sql.ErrNoRows {
-			posts[i].IsLiked = -1
-		}
+		// if err != nil { //}== sql.ErrNoRows {
+		// 	posts[i].IsLiked = -1
+		// }
 
 		// check if comments are liked
 		for j, comment := range posts[i].Comments {
-			err := database.Database.QueryRow(
+			_ = database.Database.QueryRow(
 				"SELECT is_like FROM comment_reactions WHERE user_id = ? AND comment_id = ?",
 				userId,
 				comment.Id,
 			).Scan(&posts[i].Comments[j].IsLiked)
-			if err == sql.ErrNoRows {
-				posts[i].Comments[j].IsLiked = -1
-			}
+			// if err == sql.ErrNoRows {
+			// 	posts[i].Comments[j].IsLiked = -1
+			// }
 		}
 	}
 }
