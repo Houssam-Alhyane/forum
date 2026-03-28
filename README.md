@@ -24,7 +24,7 @@ A full-stack web forum built with Go, SQLite, and Docker. Users can register, cr
 - **Authentication** — Register and login with email or username. Passwords are encrypted with `bcrypt`. Sessions use UUID cookies with expiry.
 - **Posts** — Registered users can create posts with a title, text, and one or more categories.
 - **Comments** — Registered users can comment on any post.
-- **Reactions** — Registered users can like or dislike posts and comments. Counts are visible to all users.
+- **Reactions** — Registered users can like or dislike posts and comments. Counts are visible to all users. 
 - **Filtering** — Filter posts by category, by posts you created, or by posts you liked.
 - **Rate Limiting** — All POST routes are rate-limited per IP to prevent spam.
 - **Error Handling** — HTTP 400, 401, 403, 404, 405, 429, and 500 errors are all handled with a dedicated error page.
